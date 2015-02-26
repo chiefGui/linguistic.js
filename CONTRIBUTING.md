@@ -14,15 +14,21 @@ After that, you should clone our library and build it. To do this, please, follo
 
 - To clone our repository.
 
-    git clone git@github.com:chiefGui/linguistic.js.git
+```
+git clone git@github.com:chiefGui/linguistic.js.git
+```
 
 - To access its folder.
 
-    cd linguistic.js
+```
+cd linguistic.js
+```
 
 - To install its dependencies.
 
-    npm install
+```
+npm install
+```
 
 Now, you have to know that we use [gulp.js](http://gulpjs.com/) as our task runner and [webpack](webpack.github.io) as our module bundler. To the tests, [Jest](https://facebook.github.io/jest/).
 
