@@ -111,10 +111,26 @@ function getRandom (matrix) {
 var en = {
   'h1 span.target': function () {
     names = ['world', 'ninja'];
-    return 'Hello, ' + getRandom(names) + '!';
+  return 'Hello, ' + getRandom(names) + '!';
   },
   'h3': 'How do you do?'
 };
+
+var pt = {
+  'h1 span.target': function () {
+    names = ['mundo', 'ninja'];
+    return 'Olá, ' + getRandom(names) + '!';
+  },
+  'h3': 'Como você está?'
+};
+
+var dictionaries = {
+  'en-US': en,
+  'pt-BR': pt
+};
+
+linguistic.handle(dictionaries).translate();
+
 ```
 
 You see? It's possible to use any element you want to get its string translated, also you are not limited to use only strings in the values of your dictionaries — functions are here to make all the logic you need and/or want.
