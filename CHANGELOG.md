@@ -2,4 +2,4 @@
 
 ### v0.0.1
 
-- Application is created an launched.
+- Application is created and launched.

@@ -14,7 +14,7 @@ A tiny, modular, dependency-free library to translate your web application on de
 
     npm install linguistic
 
-Or you can use a script from the [`build/`]() folder.
+Or you can use a script from the [`build/`](https://github.com/chiefGui/linguistic.js/tree/master/build) folder.
 
 _Note: linguistic.js is compatible with CommonJS, AMD or window invokation._
 
@@ -38,8 +38,8 @@ Maybe you're scared, huh? But don't be — it's easier than you think. See the f
     };
 
     var en = {
-    'h1': 'Hello, world!',
-    'h3': 'How do you do?'
+      'h1': 'Hello, world!',
+      'h3': 'How do you do?'
     };
 
     var dictionaries = {
@@ -136,7 +136,7 @@ You can distribute your translations via an API, consume them via JavaScript and
 
 ### Contributing guidelines
 
-If you want to improve linguistic in any way, please read our [CONTRIBUTING.md]() document.
+If you want to improve linguistic in any way, please read our [CONTRIBUTING.md](https://github.com/chiefGui/linguistic.js/blob/master/CONTRIBUTING.md) document.
 
 ### Tests
 
@@ -152,4 +152,4 @@ And you're good to go! :-)
 
 ### License
 
-[MIT]() &copy; 2015
+[MIT](https://github.com/chiefGui/linguistic.js/blob/master/LICENSE) &copy; 2015
