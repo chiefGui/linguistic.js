@@ -81,6 +81,44 @@ Under the hood, it uses [`navigator.language`](http://www.w3schools.com/jsref/pr
 
 Of course, the example above is flat and probably you won't apply it — but you can, for instance, make something sharper depending of your need, like extracting the locale from URL. _Learn more further._
 
+### Injecting complexity to your translations
+
+Having this markup as example:
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <title>Linguisticjs Markup Demonstration</title>
+    </head>
+    <body>
+      <h1>Bonjour le <span class="target"></span> !</h1>
+      <h3>Comment ça va ?</h3>
+    </body>
+    </html>
+
+We can do:
+
+```js
+var linguistic = require ('linguistic');
+
+var names = [];
+
+function getRandom (matrix) {
+  return matrix[Math.floor(Math.random() * matrix.length)];
+};
+
+var en = {
+  'h1 span.target': function () {
+    names = ['world', 'ninja'];
+    return 'Hello, ' + getRandom(names) + '!';
+  },
+  'h3': 'How do you do?'
+};
+```
+
+You see? It's possible to use any element you want to get its string translated, also you are not limited to use only strings in the values of your dictionaries — functions are here to make all the logic you need and/or want.
+
 ### Interface
 
 #### .translate() : returns `void`
