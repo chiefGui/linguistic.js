@@ -1,6 +1,6 @@
 {
   "name": "linguistic",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A very tiny library to translate your application based on its DOM with ease.",
   "main": "build/linguistic.min.js",
   "scripts": {
