@@ -1,7 +1,7 @@
 linguistic.js
 -
 ![version](http://img.shields.io/npm/v/linguistic.svg?style=flat)
-![travis](https://travis-ci.org/chiefGui/linguistic.js.svg?branch=v0.0.1)
+![travis](https://travis-ci.org/chiefGui/linguistic.js.svg?branch=master)
 ![Downloads](http://img.shields.io/npm/dm/linguistic.svg?style=flat)
 ![Dependencies](https://david-dm.org/chiefgui/linguistic.js.svg?style=flat)
 ![license](http://img.shields.io/npm/l/linguistic.svg?style=flat)
