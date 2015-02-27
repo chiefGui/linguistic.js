@@ -30,24 +30,26 @@ That being said, its flow is basically divided in four fragments, which are:
 
 Maybe you're scared, huh? But don't be — it's easier than you think. See the following example:
 
-    var linguistic = require ('linguistic');
+```js
+var linguistic = require ('linguistic');
 
-    var pt = {
-      'h1': 'Olá, mundo!',
-      'h3': 'Como você está?'
-    };
+var pt = {
+  'h1': 'Olá, mundo!',
+  'h3': 'Como você está?'
+};
 
-    var en = {
-      'h1': 'Hello, world!',
-      'h3': 'How do you do?'
-    };
+var en = {
+  'h1': 'Hello, world!',
+  'h3': 'How do you do?'
+};
 
-    var dictionaries = {
-      'pt-BR': pt,
-      'en-US': en
-    };
+var dictionaries = {
+  'pt-BR': pt,
+  'en-US': en
+};
 
-    linguistic.handle(dictionaries).translate();
+linguistic.handle(dictionaries).translate();
+```
 
 Looking deeper:
 
@@ -57,27 +59,31 @@ Looking deeper:
 
 This will work based on a HTML like this:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Linguisticjs Markup Demonstration</title>
-    </head>
-    <body>
-      <h1>Bonjour le monde !</h1>
-      <h3>Comment ça va ?</h3>
-    </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linguisticjs Markup Demonstration</title>
+</head>
+<body>
+  <h1>Bonjour le monde !</h1>
+  <h3>Comment ça va ?</h3>
+</body>
+</html>
+```
 
 
 #### How does linguistic.js decide when to use `pt-BR` or `en-US`?
 
 Under the hood, it uses [`navigator.language`](http://www.w3schools.com/jsref/prop_nav_language.asp) as its first criteria. In other words, it is primarily based on client's browser language. If you want to apply your own logic to handle the language that linguistic.js must to consider, feel free to do it through `.interpret()` method, such as:
 
-    linguistic
-      .interpret('pt-BR')
-      .handle(dictionaries)
-      .translate();
+```js
+linguistic
+  .interpret('pt-BR')
+  .handle(dictionaries)
+  .translate();
+```
 
 Of course, the example above is flat and probably you won't apply it — but you can, for instance, make something sharper depending of your need, like extracting the locale from URL. _Learn more further._
 
@@ -85,17 +91,19 @@ Of course, the example above is flat and probably you won't apply it — but you
 
 Having this markup as example:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Linguisticjs Markup Demonstration</title>
-    </head>
-    <body>
-      <h1>Bonjour le <span class="target"></span> !</h1>
-      <h3>Comment ça va ?</h3>
-    </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linguisticjs Markup Demonstration</title>
+</head>
+<body>
+  <h1>Bonjour le <span class="target"></span> !</h1>
+  <h3>Comment ça va ?</h3>
+</body>
+</html>
+```
 
 We can do:
 
@@ -259,7 +267,7 @@ _Note: `%s` is the same thing (value) of the first (`[0]`) position of your matr
 Check wether a number is or isn't singular. `1` is singular and `0` returns `false`.
 
 ```js
-linguistic.isSingular(1) // returns true
+linguistic.isSingular(1); // returns true
 ```
 
 #### .isPlural(Number) : returns `boolean`
@@ -267,7 +275,7 @@ linguistic.isSingular(1) // returns true
 Check wether a number is or isn't plural. `> 1` is plural and everything else returns `false`.
 
 ```js
-linguistic.isPlural(3) // returns true
+linguistic.isPlural(3); // returns true
 ```
 
 ### The concept behind
@@ -290,7 +298,7 @@ If you want to improve linguistic in any way, please read our [CONTRIBUTING.md](
 
 To make the tests, we are using [Facebook's Jest](https://facebook.github.io/jest/). To proceed, please clone:
 
-    git clone x && cd linguisticjs
+    git clone git@github.com:chiefGui/linguistic.js.git && cd linguistic.js
 
 Then
 
