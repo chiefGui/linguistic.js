@@ -7,6 +7,7 @@
 - Fixed a few things in the tests;
 - Updated the tests to suit the new cases;
 - Improved the `__tests__/markup/index.html` to be compatible with the new tests;
+- Improved README.
 
 ### v0.0.1
 
