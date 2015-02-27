@@ -181,7 +181,7 @@ var en = {
     };
 
     if (value > 1) {
-      return $value + ' followers';
+      return value + ' followers';
     };
 
     if (value === 5) {
