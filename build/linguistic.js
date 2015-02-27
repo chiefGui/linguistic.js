@@ -1,13 +1,13 @@
 /**
-* linguistic.js
-* A tiny, modular, dependency-free library to translate
-* your web application on demand using the DOM as reference.
-*
-* @author Guilherme Oderdenge <http://github.com/chiefGui>
-* @version 0.1.0
-* @license MIT
-* @year 2015
-*/
+ * linguistic.js
+ * A tiny, modular, dependency-free library to translate
+ * your web application on demand using the DOM as reference.
+ *
+ * @author Guilherme Oderdenge <http://github.com/chiefGui>
+ * @version 0.1.0
+ * @license MIT
+ * @year 2015
+ */
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -118,12 +118,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    };
 
 	    if (this.usefulDictionary[element] instanceof Array) {
-	      return this.parsePluralization(this.usefulDictionary[element]);
+	      return this.parsePluralisation(this.usefulDictionary[element]);
 	    };
 
 	    return this.usefulDictionary[element];
 	  },
-	  parsePluralization: function (matrix) {
+	  parsePluralisation: function (matrix) {
 	    if (matrix instanceof Array) {
 	      var length = matrix.length;
 
@@ -138,18 +138,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return matrix[1];
 	    };
 
-	    console.error('Pluralization is expecting an array.');
+	    console.error('Pluralisation is expecting an array.');
 	    return false;
 	  },
-	  isPlural: function (value) {
-	    if (value > 1) {
+	  isSingular: function (value) {
+	    if (value === 1) {
 	      return true;
 	    };
 
 	    return false;
 	  },
-	  isSingular: function (value) {
-	    if (value === 1) {
+	  isPlural: function (value) {
+	    if (value > 1) {
 	      return true;
 	    };
 

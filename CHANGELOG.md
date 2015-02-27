@@ -2,7 +2,7 @@
 
 ### v0.1.0 [commits](https://github.com/chiefgui/linguistic.js/compare/v0.1.0...v0.0.1)
 
-- Added a mechanism to work with pluralizations;
+- Added a mechanism to work with pluralisations;
 - Added two new methods: `isSingular()` and `isPlural()`;
 - Fixed a few things in the tests;
 - Updated the tests to suit the new cases;

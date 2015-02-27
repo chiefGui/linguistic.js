@@ -11,7 +11,7 @@ describe ('linguistic', function () {
       , pt = {}
       , en = {}
       , dictionaries = {}
-      , pluralizationMatrix = function (value) {
+      , pluralisationMatrix = function (value) {
         return [
           value,
           'Nobody watched this video.',
@@ -103,16 +103,16 @@ describe ('linguistic', function () {
     expect(linguistic.getTranslation('.followers')).toEqual('4 pessoas estão seguindo você.');
   });
 
-  it ('should return a plural string based on pluralization', function () {
-    expect(linguistic.parsePluralization(pluralizationMatrix(3))).toEqual('3 people watched this video.');
+  it ('should return a plural string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(3))).toEqual('3 people watched this video.');
   });
 
-  it ('should return a singular string based on pluralization', function () {
-    expect(linguistic.parsePluralization(pluralizationMatrix(1))).toEqual('One person watched this video.');
+  it ('should return a singular string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(1))).toEqual('One person watched this video.');
   });
 
-  it ('should return an empty string based on pluralization', function () {
-    expect(linguistic.parsePluralization(pluralizationMatrix(0))).toEqual('Nobody watched this video.');
+  it ('should return an empty string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(0))).toEqual('Nobody watched this video.');
   });
 
   it ('should check if a value is singular', function () {
