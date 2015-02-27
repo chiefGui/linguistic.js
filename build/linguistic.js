@@ -1,13 +1,13 @@
 /**
-* linguistic.js
-* A tiny, modular, dependency-free library to translate
-* your web application on demand using the DOM as reference.
-*
-* @author Guilherme Oderdenge <http://github.com/chiefGui>
-* @version 0.0.1
-* @license MIT
-* @year 2015
-*/
+ * linguistic.js
+ * A tiny, modular, dependency-free library to translate
+ * your web application on demand using the DOM as reference.
+ *
+ * @author Guilherme Oderdenge <http://github.com/chiefGui>
+ * @version 0.1.0
+ * @license MIT
+ * @year 2015
+ */
 
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -71,8 +71,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * your web application on demand using the DOM as reference.
 	 *
 	 * @author Guilherme Oderdenge <http://github.com/chiefGui>
-	 * @version 0.0.1
+	 * @version 0.1.0
 	 * @license MIT
+	 * @year 2015
 	 */
 
 	'use strict';
@@ -116,7 +117,43 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return this.usefulDictionary[element]();
 	    };
 
+	    if (this.usefulDictionary[element] instanceof Array) {
+	      return this.parsePluralisation(this.usefulDictionary[element]);
+	    };
+
 	    return this.usefulDictionary[element];
+	  },
+	  parsePluralisation: function (matrix) {
+	    if (matrix instanceof Array) {
+	      var length = matrix.length;
+
+	      if (this.isPlural(matrix[0])) {
+	        return matrix[3].replace('%s', matrix[0]);
+	      };
+
+	      if (this.isSingular(matrix[0])) {
+	        return matrix[2];
+	      };
+
+	      return matrix[1];
+	    };
+
+	    console.error('Pluralisation is expecting an array.');
+	    return false;
+	  },
+	  isSingular: function (value) {
+	    if (value === 1) {
+	      return true;
+	    };
+
+	    return false;
+	  },
+	  isPlural: function (value) {
+	    if (value > 1) {
+	      return true;
+	    };
+
+	    return false;
 	  }
 	};
 

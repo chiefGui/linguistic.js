@@ -30,24 +30,26 @@ That being said, its flow is basically divided in four fragments, which are:
 
 Maybe you're scared, huh? But don't be — it's easier than you think. See the following example:
 
-    var linguistic = require ('linguistic');
+```js
+var linguistic = require ('linguistic');
 
-    var pt = {
-      'h1': 'Olá, mundo!',
-      'h3': 'Como você está?'
-    };
+var pt = {
+  'h1': 'Olá, mundo!',
+  'h3': 'Como você está?'
+};
 
-    var en = {
-      'h1': 'Hello, world!',
-      'h3': 'How do you do?'
-    };
+var en = {
+  'h1': 'Hello, world!',
+  'h3': 'How do you do?'
+};
 
-    var dictionaries = {
-      'pt-BR': pt,
-      'en-US': en
-    };
+var dictionaries = {
+  'pt-BR': pt,
+  'en-US': en
+};
 
-    linguistic.handle(dictionaries).translate();
+linguistic.handle(dictionaries).translate();
+```
 
 Looking deeper:
 
@@ -57,27 +59,31 @@ Looking deeper:
 
 This will work based on a HTML like this:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Linguisticjs Markup Demonstration</title>
-    </head>
-    <body>
-      <h1>Bonjour le monde !</h1>
-      <h3>Comment ça va ?</h3>
-    </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linguisticjs Markup Demonstration</title>
+</head>
+<body>
+  <h1>Bonjour le monde !</h1>
+  <h3>Comment ça va ?</h3>
+</body>
+</html>
+```
 
 
 #### How does linguistic.js decide when to use `pt-BR` or `en-US`?
 
 Under the hood, it uses [`navigator.language`](http://www.w3schools.com/jsref/prop_nav_language.asp) as its first criteria. In other words, it is primarily based on client's browser language. If you want to apply your own logic to handle the language that linguistic.js must to consider, feel free to do it through `.interpret()` method, such as:
 
-    linguistic
-      .interpret('pt-BR')
-      .handle(dictionaries)
-      .translate();
+```js
+linguistic
+  .interpret('pt-BR')
+  .handle(dictionaries)
+  .translate();
+```
 
 Of course, the example above is flat and probably you won't apply it — but you can, for instance, make something sharper depending of your need, like extracting the locale from URL. _Learn more further._
 
@@ -85,17 +91,19 @@ Of course, the example above is flat and probably you won't apply it — but you
 
 Having this markup as example:
 
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <title>Linguisticjs Markup Demonstration</title>
-    </head>
-    <body>
-      <h1>Bonjour le <span class="target"></span> !</h1>
-      <h3>Comment ça va ?</h3>
-    </body>
-    </html>
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Linguisticjs Markup Demonstration</title>
+</head>
+<body>
+  <h1>Bonjour le <span class="target"></span> !</h1>
+  <h3>Comment ça va ?</h3>
+</body>
+</html>
+```
 
 We can do:
 
@@ -135,12 +143,62 @@ linguistic.handle(dictionaries).translate();
 
 You see? It's possible to use any element you want to get its string translated, also you are not limited to use only strings in the values of your dictionaries — functions are here to make all the logic you need and/or want.
 
+### Dealing with pluralisation
+
+There are two ways to work with pluralisations. The easy way:
+
+```js
+var en = {
+  '.followers': [
+    5,
+    'No followers',
+    'One follower',
+    '%s followers'
+  ]
+};
+```
+
+Yes, simple as that: an array with four spaces!
+
+-  The very first value should be the number to assert quantity;
+- The second value should to be wether the value is 0;
+- The third value should to be wether the value is 1;
+- The fourth value should to be wether the value is 2 or plus.
+
+Or, if you want to implement your own logic:
+
+```js
+var en = {
+  '.followers': function () {
+    var value = 5;
+
+    if (value === 0) {
+      return 'Nobody likes you. No followers.';
+    };
+
+    if (value === 1) {
+      return 'One follower';
+    };
+
+    if (value > 1) {
+      return value + ' followers';
+    };
+
+    if (value === 5) {
+      return '5ive followers';
+    };
+  }
+};
+```
+
 ### Interface
 
 #### .translate() : returns `void`
 Applies a dictionary against the language the client is requesting.
 
-`linguistic.translate();`
+```js
+linguistic.translate();
+```
 
 Wether the element doesn't exist in your markup, linguistic will leave it untouchable. In other words, with its default value.
 
@@ -149,32 +207,76 @@ _Note: `translate` method depends of a handled dictionary. See the next topic._
 #### .handle(Object) : returns `void`
 It handles a compatible dictionary based on the client's language — which can be pre-defined through `.interpret()` or assuming the default criteria, that is `navigator.language` property.
 
-`linguistic.handle(dictionaries);`
+```js
+linguistic.handle(dictionaries);
+```
 
 #### .clientLanguage : is a `string`
 Get the language linguistic is assuming to use.
 
-`linguistic.clientLanguage`.
+```js
+linguistic.clientLanguage;
+```
 
 #### .handleLanguage() : returns `void`
 Handle the language client is using.
 
-`linguistic.handleLanguage();`
+```js
+linguistic.handleLanguage();
+```
 
 #### .setUsefulDictionary(Object) : returns `void`
 It creates a `usefulDictionary` that is the one to be currently used based on your client's need.
 
-`linguistic.setUsefulDictionary(dictionary);`
+```js
+linguistic.setUsefulDictionary(dictionary);
+```
 
 #### .usefulDictionary : is an `object`
 It is the property storing the dictionary in use. Basically, this is the chosen one to be applied into your client's interface based on his language.
 
-`linguistic.usefulDictionary;`
+```js
+linguistic.usefulDictionary;
+```
 
 #### .getTranslation(String) : returns `string`
 It retrieves a specific translation based on a specified parameter.
 
-`linguistic.getTranslation('h1');`
+```js
+linguistic.getTranslation('h1');
+```
+
+#### .parsePluralisation([Array]) : returns `string`
+It will check for the very first value of its parameter (which is supposed to be an array) using `isSingular()` or `isPlural()` methods to determine wether string it should to return: [1] for emptiness; [2] for singular; [3] for plural.
+
+```js
+var matrix = [
+  5,
+  'No followers',
+  '1 follower',
+  '%s followers'
+];
+
+linguistic.parsePluralisation(matrix); // returns '5 followers'
+```
+
+_Note: `%s` is the same thing (value) of the first (`[0]`) position of your matrix. Only available to use in the fourth (`[3]`) position._
+
+#### .isSingular(Number) : returns `boolean`
+
+Check wether a number is or isn't singular. `1` is singular and `0` returns `false`.
+
+```js
+linguistic.isSingular(1); // returns true
+```
+
+#### .isPlural(Number) : returns `boolean`
+
+Check wether a number is or isn't plural. `> 1` is plural and everything else returns `false`.
+
+```js
+linguistic.isPlural(3); // returns true
+```
 
 ### The concept behind
 
@@ -196,7 +298,7 @@ If you want to improve linguistic in any way, please read our [CONTRIBUTING.md](
 
 To make the tests, we are using [Facebook's Jest](https://facebook.github.io/jest/). To proceed, please clone:
 
-    git clone x && cd linguisticjs
+    git clone git@github.com:chiefGui/linguistic.js.git && cd linguistic.js
 
 Then
 

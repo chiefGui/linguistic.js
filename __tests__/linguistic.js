@@ -10,7 +10,15 @@ describe ('linguistic', function () {
       , name = 'John Doe'
       , pt = {}
       , en = {}
-      , dictionaries = {};
+      , dictionaries = {}
+      , pluralisationMatrix = function (value) {
+        return [
+          value,
+          'Nobody watched this video.',
+          'One person watched this video.',
+          '%s people watched this video.'
+        ];
+      }
 
   beforeEach(function () {
     pt = {
@@ -18,7 +26,13 @@ describe ('linguistic', function () {
       'h3': 'Como você está?',
       'h5': function () {
         return 'Seu nome parece ser ' + name + ', certo?';
-      }
+      },
+      '.followers': [
+        4,
+        'Ninguém está seguindo você.',
+        'Uma pessoa está seguindo você.',
+        '%s pessoas estão seguindo você.'
+      ]
     };
 
     en = {
@@ -26,7 +40,13 @@ describe ('linguistic', function () {
       'h3': 'How do you do?',
       'h5': function () {
         return 'Your name seems to be ' + name + ', right?';
-      }
+      },
+      '.followers': [
+        4,
+        'Nobody is following you.',
+        'One person is following you.',
+        '%s people are following you.'
+      ]
     };
 
     dictionaries = {
@@ -59,19 +79,47 @@ describe ('linguistic', function () {
     expect(linguistic.getTranslation('h1')).toEqual('Olá mundo!');
   });
 
-  it ('should render a function processed into string', function () {
-    document.documentElement.innerHTML = markup;
-
-    linguistic.handle(dictionaries).translate();
-
-    expect(linguistic.usefulDictionary['h5']()).toEqual('Seu nome parece ser John Doe, certo?');
-  });
-
   it ('should render a string of translation', function () {
     document.documentElement.innerHTML = markup;
 
     linguistic.handle(dictionaries).translate();
 
-    expect(linguistic.usefulDictionary['h3']).toEqual('Como você está?');
+    expect(linguistic.getTranslation('h3')).toEqual('Como você está?');
+  });
+
+  it ('should render a function processed into a string', function () {
+    document.documentElement.innerHTML = markup;
+
+    linguistic.handle(dictionaries).translate();
+
+    expect(linguistic.getTranslation('h5')).toEqual('Seu nome parece ser John Doe, certo?');
+  });
+
+  it ('should render a plural string', function () {
+    document.documentElement.innerHTML = markup;
+
+    linguistic.handle(dictionaries).translate();
+
+    expect(linguistic.getTranslation('.followers')).toEqual('4 pessoas estão seguindo você.');
+  });
+
+  it ('should return a plural string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(3))).toEqual('3 people watched this video.');
+  });
+
+  it ('should return a singular string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(1))).toEqual('One person watched this video.');
+  });
+
+  it ('should return an empty string based on pluralisation', function () {
+    expect(linguistic.parsePluralisation(pluralisationMatrix(0))).toEqual('Nobody watched this video.');
+  });
+
+  it ('should check if a value is singular', function () {
+    expect(linguistic.isSingular(1)).toBeTruthy();
+  });
+
+  it ('should check if a value is plural', function () {
+    expect(linguistic.isPlural(2)).toBeTruthy();
   });
 });
