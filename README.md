@@ -176,17 +176,17 @@ var en = {
       return 'Nobody likes you. No followers.';
     };
 
-  if (value === 1) {
-    return 'One follower';
-  };
+    if (value === 1) {
+      return 'One follower';
+    };
 
     if (value > 1) {
       return $value + ' followers';
     };
 
-  if (value === 5) {
-    return '5ive followers';
-  };
+    if (value === 5) {
+      return '5ive followers';
+    };
   }
 };
 ```
