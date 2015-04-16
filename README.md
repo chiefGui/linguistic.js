@@ -119,7 +119,7 @@ function getRandom (matrix) {
 var en = {
   'h1 span.target': function () {
     names = ['world', 'ninja'];
-  return 'Hello, ' + getRandom(names) + '!';
+    return 'Hello, ' + getRandom(names) + '!';
   },
   'h3': 'How do you do?'
 };
